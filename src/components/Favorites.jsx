@@ -1,4 +1,23 @@
-const Favorites=()=>{
-    return <h1>where is my car</h1>
+import { useGlobalContext } from "../Context"
+
+const Favorites = () => {
+    const {favorites,selectMeal,removeFromFavorite} = useGlobalContext()
+
+    return <section className="favorites">
+        <div className="favorites-content">
+            <h5>Favorites</h5>
+            <div className="favorites-container">
+                {favorites.map((item) =>{
+                    const {idMeal ,strMealThumb:image } = item
+
+                    return <div key={idMeal} className="favorite-item">
+                        <img src={image} alt={idMeal} className="favorites-img img" onClick={()=>selectMeal(idMeal,true)} />
+                        <button className="remove-btn" onClick={()=>removeFromFavorite(idMeal)}>Remove</button>
+                    </div>
+
+                })}
+            </div>
+        </div>
+    </section>
 }
 export default Favorites
